@@ -1,0 +1,37 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Основная (темная) тема -->
+    <style name="Theme.MovieTracker" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimaryVariant">@color/primary_variant</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnBackground">@color/background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorError">@color/error</item>
+
+        <item name="android:editTextColor">@color/edit_text</item>
+        <item name="android:editTextBackground">@color/edit_text_background</item>
+        <item name="android:textColorHint">@color/hint</item>
+        <item name="android:textColor">@color/on_background</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/primary_variant</item>
+    </style>
+
+    <!-- Дополнительная (светлая) тема -->
+    <style name="Theme.MovieTracker.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/primary_variant</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnBackground">#F5F5F5</item>
+        <item name="colorSurface">#DEDEDE</item>
+        <item name="colorError">@color/error</item>
+
+        <item name="android:editTextColor">@color/black</item>
+        <item name="android:editTextBackground">@color/white</item>
+        <item name="android:textColorHint">#7A7A7A</item>
+        <item name="android:textColor">@color/on_secondary</item>
+        <item name="android:windowBackground">#F5F5F5</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/primary_variant</item>
+    </style>
+</resources>

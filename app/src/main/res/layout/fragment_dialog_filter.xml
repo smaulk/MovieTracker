@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="28dp"
+    android:background="@drawable/dialog_filter_background"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/ratingMinEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="12dp"
+        android:background="@drawable/rounded_edit_text"
+        android:layout_marginBottom="8dp"
+        android:inputType="number"
+        android:maxLines="1"
+        android:maxLength="1"
+        android:hint="Минимальный рейтинг" />
+
+    <EditText
+        android:id="@+id/ratingMaxEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="12dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/rounded_edit_text"
+        android:layout_marginBottom="8dp"
+        android:inputType="number"
+        android:maxLines="1"
+        android:maxLength="1"
+        android:hint="Максимальный рейтинг" />
+
+    <EditText
+        android:id="@+id/yearMinEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="12dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/rounded_edit_text"
+        android:layout_marginBottom="8dp"
+        android:inputType="number"
+        android:maxLines="1"
+        android:maxLength="4"
+        android:hint="Минимальный год" />
+
+    <EditText
+        android:id="@+id/yearMaxEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="12dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/rounded_edit_text"
+        android:layout_marginBottom="8dp"
+        android:inputType="number"
+        android:maxLines="1"
+        android:maxLength="4"
+        android:hint="Максимальный год" />
+
+    <!-- Кнопка для выбора жанров -->
+    <Button
+        android:id="@+id/chooseGenresButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Выберите жанры"
+        android:backgroundTint="?attr/colorSecondary"
+        android:padding="12dp" />
+
+    <!-- Кнопка для очистки фильтров -->
+    <Button
+        android:id="@+id/clearButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Очистить"
+        android:layout_marginTop="14dp"
+        android:padding="12dp"/>
+
+    <!-- Кнопка для применения фильтров -->
+    <Button
+        android:id="@+id/applyButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Применить"
+        android:padding="16dp"/>
+</LinearLayout>

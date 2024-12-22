@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/moviesFragment">
+
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.example.movietracker.ui.fragments.StatisticsFragment"
+        android:label="Статистика" />
+
+    <fragment
+        android:id="@+id/moviesFragment"
+        android:name="com.example.movietracker.ui.fragments.MoviesFragment"
+        android:label="Фильмы">
+        <action
+            android:id="@+id/action_moviesFragment_to_createMovieFragment"
+            app:destination="@id/saveMovieFragment" />
+        <action
+            android:id="@+id/action_moviesFragment_to_editMovieFragment"
+            app:destination="@id/saveMovieFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.movietracker.ui.fragments.SettingsFragment"
+        android:label="Настройки" />
+
+    <fragment
+        android:id="@+id/saveMovieFragment"
+        android:name="com.example.movietracker.ui.fragments.SaveMovieFragment"
+        android:label="Добавление фильма">
+        <action
+            android:id="@+id/action_saveMovieFragment_to_moviesFragment"
+            app:destination="@id/moviesFragment" />
+    </fragment>
+</navigation>

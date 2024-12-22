@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <!-- Обертка для Toolbar и строки поиска -->
+    <LinearLayout
+        android:id="@+id/toolbarBlock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/toolbar_background"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Toolbar для меню -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+
+            <!-- Dropdown для выбора статуса -->
+            <Spinner
+                android:id="@+id/statusSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:spinnerMode="dropdown"
+                android:background="@android:color/transparent"
+                android:popupBackground="@drawable/primary_dropdown_popup_background" />
+
+            <!-- Кнопка поиска -->
+            <ImageButton
+                android:id="@+id/searchButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:contentDescription="Поиск"
+                android:src="@drawable/ic_search"
+                app:tint="?attr/colorOnPrimary"
+                android:background="?android:attr/selectableItemBackgroundBorderless" />
+
+            <!-- Кнопка фильтра -->
+            <ImageButton
+                android:id="@+id/filterButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="25dp"
+                android:contentDescription="Фильтр"
+                android:src="@drawable/ic_filter"
+                app:tint="?attr/colorOnPrimary"
+                android:background="?android:attr/selectableItemBackgroundBorderless" />
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <!-- Поле для ввода поиска -->
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/searchEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Поиск по названию"
+            android:background="@drawable/toolbar_search_text_background"
+            android:textSize="18sp"
+            android:visibility="gone"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp" />
+    </LinearLayout>
+
+    <!-- RecyclerView для списка фильмов -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbarBlock"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:clipToPadding="false"
+        android:padding="8dp" />
+
+    <!-- Кнопка для добавления фильма -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addMovieButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Добавить фильм"
+        android:src="@drawable/ic_plus"
+        app:tint="?attr/colorOnBackground"
+        android:backgroundTint="?attr/colorPrimary"
+        app:borderWidth="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="25dp"
+        android:layout_marginEnd="20dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Movie Tracker</string>
+
+    <string name="statistics">Статистика</string>
+    <string name="movies">Фильмы</string>
+    <string name="settings">Настройки</string>
+
+    <string name="back_button">Назад</string>
+</resources>
