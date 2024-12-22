@@ -6,71 +6,115 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/ratingMinEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:paddingHorizontal="14dp"
-        android:paddingVertical="12dp"
-        android:background="@drawable/rounded_edit_text"
-        android:layout_marginBottom="8dp"
-        android:inputType="number"
-        android:maxLines="1"
-        android:maxLength="1"
-        android:hint="Минимальный рейтинг" />
 
-    <EditText
-        android:id="@+id/ratingMaxEditText"
-        android:layout_width="match_parent"
+    <!-- Заголовок "Оценка" -->
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Рейтинг"
         android:textSize="18sp"
-        android:paddingHorizontal="14dp"
-        android:paddingVertical="12dp"
-        android:layout_marginTop="3dp"
-        android:background="@drawable/rounded_edit_text"
-        android:layout_marginBottom="8dp"
-        android:inputType="number"
-        android:maxLines="1"
-        android:maxLength="1"
-        android:hint="Максимальный рейтинг" />
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
 
-    <EditText
-        android:id="@+id/yearMinEditText"
+    <!-- Группа полей для рейтинга (минимальная и максимальная оценка) -->
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:paddingHorizontal="14dp"
-        android:paddingVertical="12dp"
-        android:layout_marginTop="3dp"
-        android:background="@drawable/rounded_edit_text"
-        android:layout_marginBottom="8dp"
-        android:inputType="number"
-        android:maxLines="1"
-        android:maxLength="4"
-        android:hint="Минимальный год" />
+        android:weightSum="2">
 
-    <EditText
-        android:id="@+id/yearMaxEditText"
+        <!-- Минимальная оценка -->
+        <EditText
+            android:id="@+id/ratingMinEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="12dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/rounded_edit_text"
+            android:maxLength="1"
+            android:inputType="number"
+            android:maxLines="1"
+            android:hint="Мин" />
+
+        <!-- Максимальная оценка -->
+        <EditText
+            android:id="@+id/ratingMaxEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="12dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/rounded_edit_text"
+            android:maxLength="1"
+            android:inputType="number"
+            android:maxLines="1"
+            android:hint="Макс" />
+
+    </LinearLayout>
+
+    <!-- Заголовок "Год выпуска" -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Год выхода"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Группа полей для года (минимальный и максимальный год) -->
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:paddingHorizontal="14dp"
-        android:paddingVertical="12dp"
-        android:layout_marginTop="3dp"
-        android:background="@drawable/rounded_edit_text"
-        android:layout_marginBottom="8dp"
-        android:inputType="number"
-        android:maxLines="1"
-        android:maxLength="4"
-        android:hint="Максимальный год" />
+        android:weightSum="2">
+
+        <!-- Минимальный год -->
+        <EditText
+            android:id="@+id/yearMinEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="12dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/rounded_edit_text"
+            android:maxLength="4"
+            android:inputType="number"
+            android:maxLines="1"
+            android:hint="Мин" />
+
+        <!-- Максимальный год -->
+        <EditText
+            android:id="@+id/yearMaxEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="12dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/rounded_edit_text"
+            android:maxLength="4"
+            android:inputType="number"
+            android:maxLines="1"
+            android:hint="Макс" />
+
+    </LinearLayout>
 
     <!-- Кнопка для выбора жанров -->
     <Button
         android:id="@+id/chooseGenresButton"
-        android:layout_width="match_parent"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:text="Выберите жанры"
+        android:layout_marginTop="14dp"
         android:backgroundTint="?attr/colorSecondary"
         android:padding="12dp" />
 
@@ -89,5 +133,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Применить"
-        android:padding="16dp"/>
+        android:padding="14dp"/>
 </LinearLayout>
