@@ -69,17 +69,6 @@ public class StatisticsFragment extends Fragment {
         List<MovieWithGenres> top5Movies = getTopRatedMovies(5);
         List<String> top5Genres = getTopGenres(5);
 
-
-
-        // Отображение информации о фильмах и рейтинге
-        movieCountTextView.setText("Количество фильмов: " + movieCount);
-        avgRatingTextView.setText("Средний рейтинг: " + String.format("%.1f", avgRating));
-
-        toWatchCountTextView.setText("Хочу посмотреть: " + countToWatch);
-        watchingCountTextView.setText("Смотрю: " + countWatching);
-        watchedCountTextView.setText("Просмотрено: " + countWatched);
-
-
         // Подсчет фильмов по годам
         String yearsStats = "До 1980: " + countBefore80 + "\n" +
                 "1981-1990: " + count8090 + "\n" +
@@ -87,7 +76,6 @@ public class StatisticsFragment extends Fragment {
                 "2001-2010: " + count0010 + "\n" +
                 "2011-2020: " + count1020 + "\n" +
                 "2021-2030: " + count2030;
-        moviesByYearTextView.setText(yearsStats);
 
         // Топ 5 фильмов
         StringBuilder topMoviesString = new StringBuilder();
@@ -104,7 +92,6 @@ public class StatisticsFragment extends Fragment {
                 topMoviesString.append("\n");
             }
         }
-        topMoviesTextView.setText(topMoviesString.toString());
 
         // Топ 5 жанров
         StringBuilder topGenresString = new StringBuilder();
@@ -115,8 +102,20 @@ public class StatisticsFragment extends Fragment {
                 topGenresString.append("\n");
             }
         }
-        topGenresTextView.setText(topGenresString.toString());
 
+        requireActivity().runOnUiThread(() -> {
+            // Отображение информации о фильмах и рейтинге
+            movieCountTextView.setText("Количество фильмов: " + movieCount);
+            avgRatingTextView.setText("Средний рейтинг: " + String.format("%.1f", avgRating));
+
+            toWatchCountTextView.setText("Хочу посмотреть: " + countToWatch);
+            watchingCountTextView.setText("Смотрю: " + countWatching);
+            watchedCountTextView.setText("Просмотрено: " + countWatched);
+
+            moviesByYearTextView.setText(yearsStats);
+            topMoviesTextView.setText(topMoviesString.toString());
+            topGenresTextView.setText(topGenresString.toString());
+        });
     }
 
     private int countByStatus(Status status){
