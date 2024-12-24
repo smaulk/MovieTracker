@@ -1,9 +1,8 @@
 package com.example.movietracker.ui.fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -15,7 +14,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
@@ -33,17 +31,14 @@ import androidx.fragment.app.Fragment;
 import com.example.movietracker.R;
 import com.example.movietracker.adapters.MoviesAdapter;
 import com.example.movietracker.db.MovieWithGenres;
-import com.example.movietracker.enums.Status;
 import com.example.movietracker.enums.StatusConverter;
 import com.example.movietracker.filters.MovieFilter;
 import com.example.movietracker.models.Genre;
-import com.example.movietracker.models.Movie;
 import com.example.movietracker.ui.viewmodel.MoviesViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 public class MoviesFragment extends Fragment implements FilterDialogFragment.OnFilterAppliedListener {
@@ -56,7 +51,6 @@ public class MoviesFragment extends Fragment implements FilterDialogFragment.OnF
 
     private MovieFilter filter;
     private List<MovieWithGenres> movieList;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -74,7 +68,7 @@ public class MoviesFragment extends Fragment implements FilterDialogFragment.OnF
 
         addMovieBtn.setOnClickListener(v -> {
             // Переход к фрагменту для создания фильма
-            navController.navigate(R.id.action_moviesFragment_to_createMovieFragment);
+            navController.navigate(R.id.action_moviesFragment_to_saveMovieFragment);
         });
 
         Spinner statusSpinner= view.findViewById(R.id.statusSpinner);
@@ -147,7 +141,7 @@ public class MoviesFragment extends Fragment implements FilterDialogFragment.OnF
 
 
     // Получаем список фильмов с жанрами из бд, и отрисовываем
-    private void fillMovieList()
+    public void fillMovieList()
     {
         moviesViewModel.getAllMoviesList(result -> {
             movieList = result;
@@ -171,16 +165,13 @@ public class MoviesFragment extends Fragment implements FilterDialogFragment.OnF
         });
     }
 
-
     private void openEditMovie(MovieWithGenres movieWithGenres)
     {
         // Передаем данные в фрагмент редактирования фильма
         Bundle bundle = new Bundle();
         bundle.putSerializable("movieWithGenres", movieWithGenres);  // Передаем фильм в Bundle
-        navController.navigate(R.id.action_moviesFragment_to_editMovieFragment, bundle);
+        navController.navigate(R.id.action_moviesFragment_to_saveMovieFragment, bundle);
     }
-
-
 
     // Метод для показа диалога фильтрации
     private void showFilterDialog() {
@@ -224,7 +215,7 @@ public class MoviesFragment extends Fragment implements FilterDialogFragment.OnF
 
 
     private void setupSwipeToDelete() {
-        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT ) {
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT ) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false; // Не поддерживаем перемещение элементов
@@ -235,12 +226,27 @@ public class MoviesFragment extends Fragment implements FilterDialogFragment.OnF
                 MoviesAdapter adapter = (MoviesAdapter) recyclerView.getAdapter();
                 int position = viewHolder.getAdapterPosition();
                 MovieWithGenres movieWithGenres = adapter.getMovieFromPosition(position);
-                // Удаляем фильм из адаптера
-                adapter.removeMovieElement(position);
-                // Удаляем фильм из базы данных
-                 moviesViewModel.deleteMovie(movieWithGenres.movie);
-                 // Удаляем из списка
-                 movieList.remove(position);
+                // Показываем окно подтверждения
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("Подтверждение удаления")
+                        .setMessage("Вы уверены, что хотите удалить этот фильм?")
+                        .setPositiveButton("Удалить", (dialog, which) -> {
+                            // Удаляем фильм из адаптера
+                            adapter.removeMovieElement(position);
+                            // Удаляем фильм из базы данных
+                            moviesViewModel.deleteMovie(movieWithGenres.movie);
+                            // Удаляем из списка
+                            movieList.remove(position);
+                        })
+                        .setNegativeButton("Отмена", (dialog, which) -> {
+                            // Возвращаем элемент обратно в адаптер
+                            adapter.notifyItemChanged(position);
+                        })
+                        .setOnCancelListener(dialog -> {
+                            // Возвращаем элемент обратно в адаптер, если окно закрыто без выбора
+                            adapter.notifyItemChanged(position);
+                        })
+                        .show();
             }
 
             @Override

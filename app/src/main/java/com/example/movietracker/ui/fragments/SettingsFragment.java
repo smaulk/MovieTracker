@@ -6,50 +6,66 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import com.example.movietracker.R;
+import com.example.movietracker.db.DatabaseExporter;
+import com.example.movietracker.db.DatabaseImporter;
+import com.example.movietracker.enums.Theme;
+import com.example.movietracker.enums.ThemeConverter;
+import com.example.movietracker.ui.MainActivity;
+
+import java.io.IOException;
 
 public class SettingsFragment extends Fragment {
-    private Button changeThemeButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        changeThemeButton = view.findViewById(R.id.changeThemeButton);
+        // Устанавливаем слушатели на кнопки для смены темы
+        view.findViewById(R.id.systemThemeButton)
+                .setOnClickListener(v -> setTheme(Theme.SYSTEM));
+        view.findViewById(R.id.lightThemeButton)
+                .setOnClickListener(v -> setTheme(Theme.LIGHT));
+        view.findViewById(R.id.darkThemeButton)
+                .setOnClickListener(v -> setTheme(Theme.DARK));
 
-        // Устанавливаем слушатель на кнопку для смены темы
-        changeThemeButton.setOnClickListener(v -> {
-            toggleTheme();
-        });
+        view.findViewById(R.id.importButton)
+                .setOnClickListener(v -> DatabaseImporter.startFilePicker(requireActivity()));
+        view.findViewById(R.id.exportButton)
+                .setOnClickListener(v -> makeExport());
 
         return view;
     }
 
 
-    private void toggleTheme() {
-        // Получаем текущую тему из SharedPreferences
+    private void setTheme(Theme theme) {
+        // Записываем выбранную тему в SharedPreferences
         SharedPreferences preferences = requireActivity().getSharedPreferences("app_preferences", Context.MODE_PRIVATE);
-        String currentTheme = preferences.getString("theme", "dark"); // "dark" - тема по умолчанию
-
-        // Меняем тему
         SharedPreferences.Editor editor = preferences.edit();
-        if ("dark".equals(currentTheme)) {
-            editor.putString("theme", "light");
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); // Light тема
-        } else {
-            editor.putString("theme", "dark");
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES); // Dark тема
-        }
+        editor.putString("theme", ThemeConverter.toString(theme));
         editor.apply();
-
-        // Перезапускаем активность, чтобы применить новую тему
+        // Пересоздаем активность
         requireActivity().recreate();
+    }
+
+    private void makeExport()
+    {
+        MainActivity activity = (MainActivity) requireActivity();
+        try {
+            DatabaseExporter.exportDatabase(activity);
+            Toast.makeText(activity,
+                    "Данные успешно сохранены! Путь:\n\"Загрузки\"-> \"MovieTrackerExport\"",
+                    Toast.LENGTH_LONG).show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(activity,
+                    "Произошла ошибка при сохранении данных!",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 }

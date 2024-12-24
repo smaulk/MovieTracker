@@ -29,6 +29,9 @@
         android:layout_alignParentBottom="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:itemIconTint="@color/nav_item_color"
+        app:itemTextColor="@color/nav_item_color"
+        app:itemTextAppearance="@style/BottomNavInactiveTextStyle"
+        app:itemTextAppearanceActive="@style/BottomNavActiveTextStyle"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

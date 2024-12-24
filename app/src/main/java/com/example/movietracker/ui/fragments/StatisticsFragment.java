@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.movietracker.R;
 import com.example.movietracker.db.MovieWithGenres;
@@ -50,6 +49,7 @@ public class StatisticsFragment extends Fragment {
 
         return view;
     }
+
 
     private void getGeneralInfo(){
         int movieCount = moviesWithGenres.size();

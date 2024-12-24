@@ -7,18 +7,20 @@
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="com.example.movietracker.ui.fragments.StatisticsFragment"
-        android:label="Статистика" />
+        android:label="Статистика">
+    </fragment>
 
     <fragment
         android:id="@+id/moviesFragment"
         android:name="com.example.movietracker.ui.fragments.MoviesFragment"
         android:label="Фильмы">
         <action
-            android:id="@+id/action_moviesFragment_to_createMovieFragment"
-            app:destination="@id/saveMovieFragment" />
-        <action
-            android:id="@+id/action_moviesFragment_to_editMovieFragment"
-            app:destination="@id/saveMovieFragment" />
+            android:id="@+id/action_moviesFragment_to_saveMovieFragment"
+            app:destination="@id/saveMovieFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in_reverse"
+            app:popExitAnim="@anim/slide_out_reverse"/>
     </fragment>
 
     <fragment

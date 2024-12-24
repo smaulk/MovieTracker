@@ -49,6 +49,15 @@ public abstract class AppDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
+    // Пересоздание объекта базы данных
+    public static void recreateDatabase(Context context) {
+        // Убираем INSTANCE, чтобы создался новый
+        INSTANCE = null;
+        // Пересоздаем базу данных
+        getInstance(context);
+    }
+
+
     // Callback для заполнения данных
     private static final RoomDatabase.Callback populateCallback = new RoomDatabase.Callback() {
         @Override

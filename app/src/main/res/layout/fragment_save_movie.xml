@@ -42,8 +42,9 @@
                 android:id="@+id/titleEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Название фильма*"
+                android:hint="Название*"
                 android:padding="12dp"
+                android:maxLength="60"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/rounded_edit_text" />
 

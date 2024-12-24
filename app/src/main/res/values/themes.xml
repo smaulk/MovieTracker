@@ -14,7 +14,10 @@
         <item name="android:textColorHint">@color/hint</item>
         <item name="android:textColor">@color/on_background</item>
         <item name="android:windowBackground">@color/background</item>
-        <item name="android:statusBarColor" >@color/primary</item>
+
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor" >@color/background</item>
     </style>
 
     <!-- Дополнительная (светлая) тема -->
@@ -32,6 +35,18 @@
         <item name="android:textColorHint">#7A7A7A</item>
         <item name="android:textColor">@color/on_secondary</item>
         <item name="android:windowBackground">#F5F5F5</item>
-        <item name="android:statusBarColor" >@color/primary</item>
+
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor" >#F5F5F5</item>
+    </style>
+
+    <!-- Стиль для неактивного текста -->
+    <style name="BottomNavInactiveTextStyle">
+        <item name="android:textSize">14sp</item>
+    </style>
+    <!-- Стиль для активного текста -->
+    <style name="BottomNavActiveTextStyle">
+        <item name="android:textSize">15sp</item>
     </style>
 </resources>
