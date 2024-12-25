@@ -220,7 +220,11 @@ public class FilterDialogFragment extends DialogFragment implements GenrePickerD
             @Override
             public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
                 try {
-                    int input = Integer.parseInt(dest.toString() + source.toString());
+                    String str = dest.toString() + source.toString();
+                    if(str.isEmpty()){
+                        return null;
+                    }
+                    int input = Integer.parseInt(str);
                     if (input >= 1 && input <= 5) {
                         return null;  // Оставить ввод
                     }
