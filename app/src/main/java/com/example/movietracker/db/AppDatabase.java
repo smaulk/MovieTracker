@@ -1,6 +1,7 @@
 package com.example.movietracker.db;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -35,12 +36,13 @@ public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;
 
     // Фабричный метод для создания базы данных
-    public static AppDatabase getInstance(Context context) {
+    public static AppDatabase getInstance(@NonNull Context context) {
         if (INSTANCE == null) {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                                     AppDatabase.class, DATABASE_NAME)
+                            .setJournalMode(RoomDatabase.JournalMode.TRUNCATE)
                             .addCallback(populateCallback) // Добавляем Callback
                             .build();
                 }
@@ -49,8 +51,9 @@ public abstract class AppDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
+
     // Пересоздание объекта базы данных
-    public static void recreateDatabase(Context context) {
+    public static void recreateDatabase(@NonNull Context context) {
         // Убираем INSTANCE, чтобы создался новый
         INSTANCE = null;
         // Пересоздаем базу данных
@@ -74,13 +77,13 @@ public abstract class AppDatabase extends RoomDatabase {
 
     // Метод для предварительного заполнения базы
     private static void populateDatabase(AppDatabase db) {
-        GenreDao dao = db.genreDao();
+        GenreDao genreDao = db.genreDao();
         List<String> genresNames = GenreProvider.getGenres();
-        List<Genre> genres = new ArrayList<Genre>();
+        List<Genre> genres = new ArrayList<>();
         for (String genreName : genresNames) {
             genres.add(new Genre(genreName));
         }
 
-        dao.insertAll(genres);
+        genreDao.insertAll(genres);
     }
 }

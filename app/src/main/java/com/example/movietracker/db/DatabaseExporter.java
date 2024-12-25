@@ -3,12 +3,14 @@ package com.example.movietracker.db;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import java.io.File;
@@ -22,13 +24,12 @@ public class DatabaseExporter {
     private static String fileName = "MovieTrackerDB.db";
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
-    public static void exportDatabase(Context context) throws IOException {
+    public static void exportDatabase(@NonNull Context context) throws IOException {
         // Получаем путь к базе данных
         File currentDB = context.getDatabasePath(AppDatabase.DATABASE_NAME);
 
         // Получаем контент-резолвер для работы с MediaStore
         ContentResolver resolver = context.getContentResolver();
-
         // Путь для сохранения базы данных с именем MovieTrackerDB.db в папке "Загрузки"
         ContentValues values = new ContentValues();
         values.put(MediaStore.MediaColumns.DISPLAY_NAME, fileName); // Имя файла
@@ -39,7 +40,6 @@ public class DatabaseExporter {
 
         try (OutputStream outputStream = resolver.openOutputStream(uri);
              FileInputStream inputStream = new FileInputStream(currentDB)) {
-
             // Копируем базу данных в новый файл в MediaStore
             byte[] buffer = new byte[1024];
             int length;
@@ -50,5 +50,4 @@ public class DatabaseExporter {
         }
 
     }
-
 }

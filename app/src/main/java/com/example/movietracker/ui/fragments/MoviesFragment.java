@@ -278,7 +278,7 @@ public class MoviesFragment extends Fragment implements FilterDialogFragment.OnF
 
                 } else {
                     // Восстанавливаем исходный фон, если свайп завершён
-                    itemView.setBackgroundResource(R.drawable.rounded_background);
+                    itemView.setBackgroundResource(R.drawable.rounded_movie_item_background);
                 }
             }
         };

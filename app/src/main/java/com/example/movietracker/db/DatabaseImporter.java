@@ -56,7 +56,6 @@ public class DatabaseImporter {
                     if (inputStream != null) {
                         // Путь к базе данных, куда нужно импортировать
                         File currentDB = context.getDatabasePath(AppDatabase.DATABASE_NAME);
-
                         // Если база данных существует, удалим ее перед копированием
                         if (currentDB.exists()) {
                             // Закрываем текущую базу данных, если она открыта

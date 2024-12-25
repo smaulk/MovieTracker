@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                                 ? com.google.android.material.R.attr.colorPrimary
                                 : com.google.android.material.R.attr.colorOnBackground
                 );
-            }, 100);
+            }, 150);
         });
     }
 

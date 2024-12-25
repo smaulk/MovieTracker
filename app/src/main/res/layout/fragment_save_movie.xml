@@ -62,13 +62,14 @@
                 android:background="@drawable/rounded_edit_text" />
 
             <!-- Описание -->
-            <androidx.appcompat.widget.AppCompatEditText
+            <EditText
                 android:id="@+id/descriptionEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxHeight="200dp"
+                android:maxLines="6"
                 android:hint="Описание"
                 android:inputType="textMultiLine"
+                android:scrollbars="vertical"
                 android:padding="12dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/rounded_edit_text" />
@@ -88,9 +89,10 @@
                 android:id="@+id/commentEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxHeight="250dp"
+                android:maxLines="6"
                 android:hint="Комментарий"
                 android:inputType="textMultiLine"
+                android:scrollbars="vertical"
                 android:padding="12dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/rounded_edit_text" />

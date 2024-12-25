@@ -1,8 +1,10 @@
 package com.example.movietracker.ui.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -10,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -33,6 +36,7 @@ import java.util.List;
 public class SaveMovieFragment extends Fragment implements GenrePickerDialogFragment.GenrePickerDialogListener {
 
     private EditText titleEditText, yearEditText, descriptionEditText, commentEditText;
+    private ScrollView scrollView;
     private RatingBar ratingBar;
     private Spinner statusSpinner;
     private Button chooseGenresButton, saveButton;
@@ -48,6 +52,7 @@ public class SaveMovieFragment extends Fragment implements GenrePickerDialogFrag
     public SaveMovieFragment() {
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -64,6 +69,12 @@ public class SaveMovieFragment extends Fragment implements GenrePickerDialogFrag
         backButton = view.findViewById(R.id.backButton);
         saveButton = view.findViewById(R.id.saveButton);
         chooseGenresButton = view.findViewById(R.id.chooseGenresButton);
+        scrollView = view.findViewById(R.id.scrollView);
+
+        descriptionEditText.setOnTouchListener((view1, motionEvent)
+                -> removeScroll(descriptionEditText.getLineCount()));
+        commentEditText.setOnTouchListener((view1, motionEvent)
+                -> removeScroll(commentEditText.getLineCount()));
 
         selectedGenreIds = new ArrayList<>();
         // Загружаем список жанров
@@ -89,6 +100,12 @@ public class SaveMovieFragment extends Fragment implements GenrePickerDialogFrag
         setMovieData();
 
         return view;
+    }
+
+    private boolean removeScroll(int lineCount) {
+        // Убираем скролл ScrollView, если количество линий EditText больше 6
+        scrollView.requestDisallowInterceptTouchEvent(lineCount > 6);
+        return false;
     }
 
     private void setMovieData() {
